@@ -6,7 +6,7 @@ Welcome to our Github repository
 
 ## Disclaimer
 
-Please don't just copy the codes, change it a little
+Please don't just copy the code, change it a little
 
 ![](https://i.imgur.com/NEbF7lM.jpg)
 
