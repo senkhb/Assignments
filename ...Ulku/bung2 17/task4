@@ -1,0 +1,66 @@
+ects_earned = 138
+points_earned = 44
+points_max = 60
+ects_required_for_ba = 180
+
+print("So far you earned", ects_earned, "ECTS points.")
+print("In the exam you got", points_earned, "of", points_max ,"points.")
+
+
+ects_missing = ects_required_for_ba - ects_earned
+print("You need", ects_missing, "ECTS points to pass your bachelor.")
+
+courses_with_6_ects = ects_missing / 6
+
+print("You have to pass", courses_with_6_ects,"courses with 6 ECTS points.")
+
+
+
+
+
+def percentage_completed(a, b):
+    c = round(a/b*100)
+    return str(c)+'%'
+
+def calculate_grade(a, b):
+    grade = (a / b) * 5 + 1
+    print("Grade in the exam:", grade)
+calculate_grade(points_earned, points_max)
+
+def multiple_of(a, b):
+    if a % b == 0:
+        return True
+    else:
+        return False
+print(multiple_of(ects_missing, 3))
+
+
+def new_ects(n):
+    global ects_earned
+    global ects_missing
+    while True:
+        new_input = input("Do you want to enter more recently earned ects points? (yes/no)\n")
+        if new_input != "yes":
+            break
+        else:
+
+            while True:
+                if ects_earned >= ects_required_for_ba:
+                    print("Congratulations, you finished your bachelor degree!")
+                    print(percentage_completed(ects_earned, ects_required_for_ba))
+                else:
+                    recently_earned_ects = int(input("Please enter your recently earned ects points:\n"))
+                    if recently_earned_ects == -1:
+                        break
+                    else:
+                        ects_earned = ects_earned + recently_earned_ects
+                        print("You have", ects_earned, "ects points right now.")
+                        ects_missing = ects_required_for_ba - ects_earned
+                        if ects_missing < 30:
+                            print("You're almost there, keep going!")
+                            break
+                        else:
+                            print("There is still a long way to go...")
+                            break
+
+new_ects(ects_earned)
