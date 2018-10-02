@@ -1,0 +1,18 @@
+# Please do not modify this part of the code!
+result = ""
+
+# Your code goes here
+user1 = input("Rock, Paper or Scissors?\n")
+user2 = input("Rock, Paper or Scissors?\n")
+
+if user1 != "Rock" and user1 != "Paper" and user1 != "Scissors" or user2 != "Rock" and user2 != "Paper" and user2 != "Scissors":
+    result = "Wrong input"
+else:
+    if user1 == user2:
+        result = "Tie"
+    elif user1 == "Rock" and user2 == "Scissors" or user1 == "Paper" and user2 == "Rock" or user1 == "Scissors" and user2 == "Paper":
+        result = "User 1 wins!"
+    else:
+        result = "User 2 wins!"
+        
+print(result)
