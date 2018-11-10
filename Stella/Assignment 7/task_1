@@ -1,0 +1,77 @@
+# ========= Your classes ==========
+class Password:
+
+    def __init__(self, name, username, password):
+        self.__name =  name
+        self.__username = username
+        self.__password = password
+
+    def pretty_str_password(self):
+        return "{}: {} / {}".format(self.__name, self.__username, self.__password)
+
+    def __str__(self):
+        masked_password = len(self.__password) * "*"
+        return "{}: {} / {}".format(self.__name, self.__username, masked_password)
+
+class PasswordManager:
+
+    def __init__(self, master_password):
+        self.__master_password = master_password
+        self.__passwords = {}
+        self.unlocked = False
+
+    def lock(self):
+        self.unlocked = False
+
+    def unlock(self, master_password):
+        if self.__master_password == master_password:
+            self.unlocked = True
+            return True
+        else:
+            return False
+
+    def create_new_password(self, name, username, password):
+        if name in self.__passwords or self.unlocked == False:
+            return None
+        else:
+            self.__passwords[name] = Password(name, username, password)
+            return self.__passwords[name]
+
+    def update_password(self, name, username, password):
+        if name in self.__passwords and self.unlocked == True:
+            self.__passwords[name] = Password(name, username, password)
+            return self.__passwords[name]
+        else:
+            return None
+
+    def get_password(self, name):
+        if name in self.__passwords and self.unlocked == True:
+            return self.__passwords[name]
+        else:
+            return None
+
+    def list_passwords(self):
+        lst=[]
+        if self.unlocked:
+            for name in self.__passwords:
+                lst.append(self.__passwords[name].pretty_str_password())
+        else:
+            for name in self.__passwords:
+                lst.append(self.__passwords[name].__str__())
+        return lst
+
+# =================================
+
+if __name__=="__main__":
+    manager = PasswordManager("abc") #Create a new password manager
+    manager.unlock("abc") #Unlock it with the master password
+
+    # Create new passwords
+    manager.create_new_password("pw1", "user1", "aaa")
+    manager.create_new_password("pw2", "user2", "bbb")
+
+    print(manager.list_passwords()) # Prints the passwords in plain text
+
+    manager.lock() # Lock the password manager
+
+    print(manager.list_passwords()) # Prints the masked passwords
